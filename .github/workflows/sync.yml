@@ -1,0 +1,19 @@
+name: sync
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: koki-develop/setup-qiita-cli@v1
+        with:
+          version: latest
+          access-token: ${{ secrets.QIITA_ACCESS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      # TODO: 同期処理
+      - run: qiita --version
